@@ -7,12 +7,9 @@ import java.io.IOException;
 import javax.swing.*;
 
 public class Paint {
-	
-	public static void main(String[] args) throws IOException {
-		boolean stop = false;
-		
 
-		
+	public static void main(String[] args) throws IOException {
+
 		JFrame frame = new JFrame("Paint It");
 		// Creates a frame with a title of "Paint it"
 
@@ -43,27 +40,17 @@ public class Paint {
 			}
 		});
 
-		JButton stopButton = new JButton("Stop");
-		
-		stopButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			  drawPad.stop(stop);
-
-			}
-		});
-
 		JButton sendButton = new JButton("Send");
 		sendButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
 				drawPad.send();
-			
+
 			}
 		});
 
 		panel.add(clearButton);
 		panel.add(sendButton);
-		panel.add(stopButton);
+
 		// adds the buttons to the panel
 
 		content.add(panel, BorderLayout.SOUTH);

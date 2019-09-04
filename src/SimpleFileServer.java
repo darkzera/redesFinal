@@ -21,6 +21,7 @@ public class SimpleFileServer {
 		new Thread(t1).start();
 		new Thread(t2).start();
 	}
+
 	private static Runnable t1 = new Runnable() {
 		public void run() {
 			final String SERVER = "localhost";
@@ -68,10 +69,9 @@ public class SimpleFileServer {
 							os.close();
 						if (sock != null)
 							sock.close();
-					}catch (IOException e) {
+					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-
 
 					}
 				}
@@ -81,35 +81,29 @@ public class SimpleFileServer {
 	private static Runnable t2 = new Runnable() {
 		public void run() {
 
-
-
 			final int SOCKET_PORT = 4200; // you may change this
+			final String SERVER = "localhost"; // localhost
 
+			String hostName = SERVER;
 			int portNumber = SOCKET_PORT;
 
-			System.out.println("Servidor ECHO pronto... Pressione CTRL+C para sair. \nAguardando o Cliente...");
-			try (
-					ServerSocket serverSocket = new ServerSocket(SOCKET_PORT);
-					Socket clientSocket = serverSocket.accept();
-					PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-					BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-					) {
-				String inputLine;
-				System.out.println("Aguardando Mensagem a enviar...");
-				while ((inputLine = in.readLine()) != null) {
-					System.out.println("Mensagem enviada: " + inputLine);
-					out.println(inputLine);
-					System.out.println("Digite nova mensagem...");
+			System.out.println("Cliente ECHO iniciado...");
+			try (Socket echoSocket = new Socket(hostName, portNumber);
+					BufferedReader in = new BufferedReader(new InputStreamReader(echoSocket.getInputStream()));) {
+				String userInput;
+				System.out.println("Conectado ao Servidor.");
+				System.out.println("Aguardando resposta do outro jogador...");
+				while ((userInput = in.readLine()) != null) {
+					System.out.println("Resposta recebida: " + userInput);
 				}
+			} catch (UnknownHostException e) {
+				System.err.println("Ocorreu um erro ao tentar conectar ao servidor " + hostName);
+				System.exit(1);
 			} catch (IOException e) {
-				System.out.println("Erro detectado ao tentar ouvir a porta " + portNumber + " ou escutar a conexÃ£o.");
-				System.out.println(e.getMessage());
+				System.err.println("Não foi possível conectar ao Servidor " + hostName);
+				System.exit(1);
 			}
-
 		}
 	};
 
-
 }
-
-

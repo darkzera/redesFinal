@@ -14,6 +14,10 @@ import java.net.UnknownHostException;
 public class SimpleFileClient {
 
 	public static void main(String[] args) {
+		
+		
+		
+		
 		new Thread(t1).start();
 		new Thread(t2).start();
 
@@ -21,6 +25,12 @@ public class SimpleFileClient {
 
 	private static Runnable t1 = new Runnable() {
 		public void run() {
+			try {
+				Thread.sleep(60000);
+			} catch (InterruptedException e1) {
+				
+				e1.printStackTrace();
+			}
 			final int SOCKET_PORT = 13267; // you may change this
 			final String SERVER = "localhost"; // localhost
 			final String FILE_TO_RECEIVED = "\\Users\\nicol\\Desktop\\ImagemSerializedeucetocarai2.ser"; // you
@@ -55,6 +65,7 @@ public class SimpleFileClient {
 				bos.flush();
 				System.out.println("File " + FILE_TO_RECEIVED + " downloaded (" + current + " bytes read)");
 				HandlerImage.readObject();
+				Imgreader.main(null);
 
 			} catch (UnknownHostException e) {
 				// TODO Auto-generated catch block
@@ -75,7 +86,7 @@ public class SimpleFileClient {
 					if (sock != null)
 						sock.close();
 				} catch (IOException e) {
-			
+
 					e.printStackTrace();
 				}
 			}
@@ -85,33 +96,30 @@ public class SimpleFileClient {
 	private static Runnable t2 = new Runnable() {
 		public void run() {
 			final int SOCKET_PORT = 4200; // you may change this
-	    	final String SERVER = "localhost"; // localhost
-	    	
-	       
-	        String hostName = SERVER;
-	        int portNumber = SOCKET_PORT;
 
-	        System.out.println("Cliente ECHO iniciado...");
-	        try (
-	            Socket echoSocket = new Socket(hostName, portNumber);
-	            BufferedReader in = new BufferedReader(new InputStreamReader(echoSocket.getInputStream()));
-	        ) {
-	            String userInput;
-	            System.out.println("Conectado ao Servidor.");
-	            System.out.println("Aguardando mensagem...");
-	            while ((userInput = in.readLine()) != null) {
-	                System.out.println("Mensagem recebida: " + userInput);
-	            }
-	        } catch (UnknownHostException e) {
-	            System.err.println("Ocorreu um erro ao tentar conectar ao servidor " + hostName);
-	            System.exit(1);
-	        } catch (IOException e) {
-	            System.err.println("Não foi possível conectar ao Servidor " + hostName);
-	            System.exit(1);
-	        } 
-	    
-			
+			int portNumber = SOCKET_PORT;
+
+			System.out.println("Servidor ECHO pronto... Pressione CTRL+C para sair. \nAguardando o outro jogador terminar o desenho");
+			try (ServerSocket serverSocket = new ServerSocket(SOCKET_PORT);
+					Socket clientSocket = serverSocket.accept();
+					PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+					BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+
+			) {
+				String inputLine;
+				System.out.println("Envie sua resposta assim que identificar o desenho...");
+				while ((inputLine = in.readLine()) != null) {
+					System.out.println("Resposta enviada: " + inputLine);
+					out.println(inputLine);
+					System.out.println("Digite nova mensagem...");
+				}
+			} catch (IOException e) {
+				System.out.println("Erro detectado ao tentar ouvir a porta " + portNumber + " ou escutar a conexÃ£o.");
+				System.out.println(e.getMessage());
+			}
+
 		}
+
 	};
 
 }
