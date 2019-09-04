@@ -1,43 +1,18 @@
 package redesFinal;
 
-
 import java.awt.*;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.ObjectOutputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
-
-
-
 public class Paint {
-	public static void main(String[] args) {
-		
-		
 	
-	
+	public static void main(String[] args) throws IOException {
+		boolean stop = false;
 		
-		Icon iconB = new ImageIcon("blue.gif");
 
-		Icon iconM = new ImageIcon("magenta.gif");
-
-		Icon iconR = new ImageIcon("red.gif");
-
-		Icon iconBl = new ImageIcon("black.gif");
-
-		Icon iconG = new ImageIcon("green.gif");
-
+		
 		JFrame frame = new JFrame("Paint It");
 		// Creates a frame with a title of "Paint it"
 
@@ -54,9 +29,9 @@ public class Paint {
 
 		JPanel panel = new JPanel();
 		// creates a JPanel
-		panel.setPreferredSize(new Dimension(62, 98));
-		panel.setMinimumSize(new Dimension(62, 98));
-		panel.setMaximumSize(new Dimension(62, 98));
+		panel.setPreferredSize(new Dimension(32, 68));
+		panel.setMinimumSize(new Dimension(32, 68));
+		panel.setMaximumSize(new Dimension(32, 68));
 		// This sets the size of the panel
 
 		JButton clearButton = new JButton("Clear");
@@ -64,46 +39,28 @@ public class Paint {
 		clearButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				drawPad.clear();
-				
+
 			}
 		});
+
+		JButton stopButton = new JButton("Stop");
 		
-		
-		JButton stopButton = new JButton("CHEGA");
-		// creates the clear button and sets the text as "Clear"
 		stopButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				drawPad.stop();
-				
+			  drawPad.stop(stop);
+
 			}
 		});
-		
-		
-		
-		
-		
-		// this is the clear button, which clears the screen. This pretty
-		// much attaches an action listener to the button and when the
-		// button is pressed it calls the clear() method
 
 		JButton sendButton = new JButton("Send");
 		sendButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 				drawPad.send();
-				
-				try {
-					SimpleFileServer.main();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
-				
-				
+			
 			}
 		});
 
-		
 		panel.add(clearButton);
 		panel.add(sendButton);
 		panel.add(stopButton);
@@ -120,10 +77,4 @@ public class Paint {
 		// makes it so you can see it
 	}
 
-		
-	}
-
-
-
-
-	
+}
