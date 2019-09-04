@@ -1,3 +1,4 @@
+package redesFinal;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,16 +10,16 @@ import java.net.Socket;
 public class SimpleFileServer {
 
     public final static int SOCKET_PORT = 13267;  // you may change this
-    public final static String FILE_TO_SEND = "/home/darkzera/main.java";  // you may change this
+    public final static String FILE_TO_SEND = "\\Users\\nicol\\Desktop\\ImagemSerialize.ser";  // you may change this
 
-    public static void main (String [] args ) throws IOException {
+    public static void main () throws IOException {
         FileInputStream fis = null;
         BufferedInputStream bis = null;
         OutputStream os = null;
         ServerSocket servsock = null;
         Socket sock = null;
         try {
-            servsock = new ServerSocket(SOCKET_PORT);
+           servsock = new ServerSocket(SOCKET_PORT);
             while (true) {
                 System.out.println("Waiting...");
                 try {
@@ -35,16 +36,17 @@ public class SimpleFileServer {
                     os.write(mybytearray,0,mybytearray.length);
                     os.flush();
                     System.out.println("Done.");
+                    
                 }
                 finally {
-                    if (bis != null) bis.close();
-                    if (os != null) os.close();
-                    if (sock!=null) sock.close();
+                    if (bis == null) bis.close();
+                    if (os == null) os.close();
+                    if (sock==null) sock.close();
                 }
             }
         }
-        finally {
-            if (servsock != null) servsock.close();
+       finally {
+            if (servsock == null) servsock.close();
         }
     }
 }
