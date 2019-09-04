@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -61,16 +62,10 @@ class PadDraw extends JComponent {
 		}
 		g.drawImage(image, 0, 0, null);
 	}
-
-	// this is the painting bit
-	// if it has nothing on it then
-	// it creates an image the size of the window
-	// sets the value of Graphics as the image
-	// sets the rendering
-	// runs the clear() method
-	// then it draws the image
 	public void send() {
 		try {
+			
+			
 			BufferedImage bimage = new BufferedImage(image.getWidth(null), image.getHeight(null),
 					BufferedImage.TYPE_INT_ARGB);
 			// Draw the image on to the buffered image
@@ -81,10 +76,14 @@ class PadDraw extends JComponent {
 			bGr.dispose();
 			HandlerImage.writeObject(HandlerImage.writeImage(bimage, "PNG"));
 			System.out.println("salvo em " + path);
-			HandlerImage.readObject();
+			SimpleFileServer.main();
+		
+		
+			
+			
 
-		} catch (Exception ex) {
-			Logger.getLogger(PadDraw.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (Exception e) {
+			Logger.getLogger(PadDraw.class.getName()).log(Level.SEVERE, null, e);
 		}
 	}
 
@@ -94,13 +93,11 @@ class PadDraw extends JComponent {
 		graphics2D.setPaint(Color.black);
 		repaint();
 	}
-	
-	public void stop() {
-		System.out.println("FODA-SE");
+
+	public boolean stop(boolean stop) {
+		return stop = true;
 	}
 
-	
-	
 	public void black() {
 		graphics2D.setPaint(Color.black);
 		repaint();

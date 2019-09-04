@@ -52,7 +52,7 @@ public class HandlerImage {
 				/*
 				 * Responsável por carregar o arquivo ImagemSerialize.ser
 				 * */
-				FileInputStream fin = new FileInputStream("\\Users\\nicol\\Desktop\\ImagemSerialize.ser");
+				FileInputStream fin = new FileInputStream("\\Users\\nicol\\Desktop\\ImagemSerializedeucetocarai2.ser");
 
 				String dirName="\\Users\\nicol\\Desktop"; 
 				/*
@@ -66,7 +66,7 @@ public class HandlerImage {
 				 * */
 				byte[] teste = (byte[]) ois.readObject();
 				BufferedImage imag = ImageIO.read(new ByteArrayInputStream(teste));
-				ImageIO.write(imag, "PNG", new File(dirName,"ImagemRetornando.png"));
+				ImageIO.write(imag, "PNG", new File(dirName,"EraIssoQueFaltavaEdeucerto.png"));
 				System.out.println("Salvou em " +dirName);
 
 			}catch(Exception ex){
