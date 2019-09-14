@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import java.awt.*; 
+import javax.swing.*;
 import javax.imageio.ImageIO;
 
 public class HandlerImage {
@@ -66,7 +68,7 @@ public class HandlerImage {
 				 * */
 				byte[] teste = (byte[]) ois.readObject();
 				BufferedImage imag = ImageIO.read(new ByteArrayInputStream(teste));
-				ImageIO.write(imag, "PNG", new File(dirName,"EraIssoQueFaltavaEdeucerto.png"));
+				ImageIO.write(imag, "PNG", new File(dirName,"ImagemRetornada.png"));
 				System.out.println("Salvou em " +dirName);
 
 			}catch(Exception ex){
