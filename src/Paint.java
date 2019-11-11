@@ -7,10 +7,15 @@ import java.io.IOException;
 import javax.swing.*;
 
 public class Paint {
+<<<<<<< HEAD
 	
 	public static void main(String[] args) throws IOException {
 		boolean stop = false;
 		
+=======
+
+	public static void main(String[] args) throws IOException {
+>>>>>>> master
 
 		
 		JFrame frame = new JFrame("Paint It");
@@ -40,6 +45,7 @@ public class Paint {
 			public void actionPerformed(ActionEvent e) {
 				drawPad.clear();
 
+<<<<<<< HEAD
 			}
 		});
 
@@ -49,6 +55,8 @@ public class Paint {
 			public void actionPerformed(ActionEvent e) {
 			  drawPad.stop(stop);
 
+=======
+>>>>>>> master
 			}
 		});
 
@@ -57,13 +65,17 @@ public class Paint {
 			public void actionPerformed(ActionEvent e) {
 
 				drawPad.send();
+<<<<<<< HEAD
 			
+=======
+
+>>>>>>> master
 			}
 		});
 
 		panel.add(clearButton);
 		panel.add(sendButton);
-		panel.add(stopButton);
+
 		// adds the buttons to the panel
 
 		content.add(panel, BorderLayout.SOUTH);

@@ -62,10 +62,17 @@ class PadDraw extends JComponent {
 		}
 		g.drawImage(image, 0, 0, null);
 	}
+<<<<<<< HEAD
 	public void send() {
 		try {
 			
 			
+=======
+
+	public void send() {
+		try {
+
+>>>>>>> master
 			BufferedImage bimage = new BufferedImage(image.getWidth(null), image.getHeight(null),
 					BufferedImage.TYPE_INT_ARGB);
 			// Draw the image on to the buffered image
@@ -77,10 +84,13 @@ class PadDraw extends JComponent {
 			HandlerImage.writeObject(HandlerImage.writeImage(bimage, "PNG"));
 			System.out.println("salvo em " + path);
 			SimpleFileServer.main();
+<<<<<<< HEAD
 		
 		
 			
 			
+=======
+>>>>>>> master
 
 		} catch (Exception e) {
 			Logger.getLogger(PadDraw.class.getName()).log(Level.SEVERE, null, e);
@@ -93,10 +103,13 @@ class PadDraw extends JComponent {
 		graphics2D.setPaint(Color.black);
 		repaint();
 	}
+<<<<<<< HEAD
 
 	public boolean stop(boolean stop) {
 		return stop = true;
 	}
+=======
+>>>>>>> master
 
 	public void black() {
 		graphics2D.setPaint(Color.black);
